@@ -7,7 +7,7 @@
             "id": "6d28d196-fb1e-4b57-abcc-a74ec44382b2",
             "actions": [
                 {
-                    "name": "Look",
+                    "name": "MouseMove",
                     "type": "Value",
                     "id": "e6d9fb84-5906-410b-a55a-6d97c3e574c7",
                     "expectedControlType": "Vector2",
@@ -33,7 +33,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Look",
+                    "action": "MouseMove",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
