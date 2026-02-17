@@ -2,6 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 public class InteractionManager : MonoBehaviour
 {
+    private const float DISTANCE_FROM_CAMERA = 10f;
     public static InteractionManager Instance { get; private set; }
     private Camera cam;
     [SerializeField] private InputManager input;
@@ -18,7 +19,18 @@ public class InteractionManager : MonoBehaviour
         Instance = this;
         cam = Camera.main;
     }
-    
+
+    private void Update()
+    {
+        if (currentGrabable != null)
+        {
+            Vector3 mousePos = Input.mousePosition;
+            mousePos.z = DISTANCE_FROM_CAMERA;
+            Vector3 worldPos = cam.ScreenToWorldPoint(mousePos);
+            currentGrabable.transform.position = worldPos;
+        }
+    }
+
     private void OnEnable()
     {
         input.OnInputDown += HandleClickDown;
