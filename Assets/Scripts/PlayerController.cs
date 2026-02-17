@@ -9,16 +9,18 @@ class PlayerController : MonoBehaviour
 
     private float speed = 5f;
     private Rigidbody2D rb;
+
     private Camera cam;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        cam = Camera.main;
+        this.rb = GetComponent<Rigidbody2D>();
+        this.cam = Camera.main;
     }
 
-    void Update()
+    void FixedUpdate()
     {
+        // Handle movement step
         float step = speed * Time.deltaTime;
         float forwardAxis = iarForward.action.ReadValue<float>();
         float rightwardAxis = iarRightward.action.ReadValue<float>();
@@ -37,6 +39,7 @@ class PlayerController : MonoBehaviour
             this.transform.Translate(rightwardAxis * step *rightDir);
         }
 
-        cam.transform.position = this.transform.position + CAMERA_OFFSET;
+        // Handle camera position
+        this.cam.transform.position = this.transform.position + CAMERA_OFFSET;
     }
 }
