@@ -17,6 +17,13 @@ namespace GameEnum
     {
         Pancake,
         ButteredPancake
+    }
+    public enum CustomerState
+    {
+        Idle,
+        Order,
+        Leave,
+    }
     public enum ActionState
     {
         Success,
