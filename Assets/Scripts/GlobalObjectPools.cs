@@ -1,34 +1,30 @@
 using UnityEngine;
 using GameEnum;
-using System.Collections.Generic;
+using System;
 
 public class GlobalObjectPools : MonoBehaviour
 {
     public static GlobalObjectPools Instance { get; private set; }
-    public static ObjectPool BatterPool { get; private set; }
-    public static ObjectPool EggPool { get; private set; }
-    public static ObjectPool FlourPool { get; private set; }
-    public static ObjectPool ButterPool { get; private set; }
+    private ObjectPool BatterPool { get; set; }
+    private ObjectPool EggPool { get; set; }
+    private ObjectPool FlourPool { get; set; }
+    private ObjectPool ButterPool { get; set; }
     
     private void Awake()
     {
-        // Singleton pattern
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
         
-        Instance = this;
-        DontDestroyOnLoad(gameObject); // Optional: keep between scenes
-        
-        // Load prefabs directly - no 'type' variable needed
         string PREFAB_PATH = "Prefabs/Ingredients/";
-        
-        BatterPool = new ObjectPool(Resources.Load<GameObject>(PREFAB_PATH + "Batter"));
-        EggPool = new ObjectPool(Resources.Load<GameObject>(PREFAB_PATH + "Egg"));
-        FlourPool = new ObjectPool(Resources.Load<GameObject>(PREFAB_PATH + "Flour"));
-        ButterPool = new ObjectPool(Resources.Load<GameObject>(PREFAB_PATH + "Butter"));
+
+        this.BatterPool = new ObjectPool(Resources.Load<GameObject>(PREFAB_PATH + "Batter"));
+        this.EggPool = new ObjectPool(Resources.Load<GameObject>(PREFAB_PATH + "Egg"));
+        this.FlourPool = new ObjectPool(Resources.Load<GameObject>(PREFAB_PATH + "Flour"));
+        this.ButterPool = new ObjectPool(Resources.Load<GameObject>(PREFAB_PATH + "Butter"));
+        Instance = this;
     }
 
     public static ObjectPool GetPoolByIngredientType(IngredientType type)
@@ -36,13 +32,13 @@ public class GlobalObjectPools : MonoBehaviour
         switch (type)
         {
             case IngredientType.Batter:
-                return BatterPool;
+                return Instance.BatterPool;
             case IngredientType.Egg:
-                return EggPool;
+                return Instance.EggPool;
             case IngredientType.Flour:
-                return FlourPool;
+                return Instance.FlourPool;
             case IngredientType.Butter:
-                return ButterPool;
+                return Instance.ButterPool;
             default:
                 Debug.LogError($"No pool found for ingredient type: {type}");
                 return null;
