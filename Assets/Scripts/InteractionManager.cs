@@ -60,11 +60,18 @@ public class InteractionManager : MonoBehaviour
         if (currentGrabable != null) return;
         Clickable clickable = currentGrabable.transform.GetComponent<Clickable>();
         clickable?.OnClickRelease();
-        currentGrabable = null;
     }
 
     public static void GrabObject(GameObject obj)
     {
         Instance.currentGrabable = obj;
+    }
+
+    public static void ReleaseObject(GameObject obj)
+    {
+        if (Instance.currentGrabable == obj)
+        {
+            Instance.currentGrabable = null;
+        }
     }
 }
