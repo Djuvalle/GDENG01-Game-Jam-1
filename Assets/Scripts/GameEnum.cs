@@ -13,7 +13,10 @@ namespace GameEnum
         Batter,
         Butter
     }
-
+    public enum FoodType
+    {
+        Pancake,
+        ButteredPancake
     public enum ActionState
     {
         Success,
