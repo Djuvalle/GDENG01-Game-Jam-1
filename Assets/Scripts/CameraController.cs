@@ -14,7 +14,7 @@ public class CameraController : MonoBehaviour
         Cursor.visible = false;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         transform.Rotate(Vector3.up, mouseInput.x * sensitivity * Time.deltaTime);
         pitch -= mouseInput.y * sensitivity * Time.deltaTime;
