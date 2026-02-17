@@ -10,6 +10,8 @@ namespace GameEnum
     }
     public enum IngredientType
     {
+        Flour,
+        Egg,
         Batter,
         Butter
     }
