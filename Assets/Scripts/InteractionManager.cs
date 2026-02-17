@@ -9,7 +9,6 @@ public class InteractionManager : MonoBehaviour
     private GameObject currentGrabable;
     private void Awake()
     {
-        // Singleton pattern
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
