@@ -1,7 +1,5 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using GameEnum;
-using UnityEngine.Pool;
 
 public class IngredientBox : MonoBehaviour, Clickable
 {
