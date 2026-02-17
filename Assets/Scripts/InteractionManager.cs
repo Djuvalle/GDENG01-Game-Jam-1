@@ -6,19 +6,6 @@ public class InteractionManager : MonoBehaviour
     private Camera cam;
     [SerializeField] private InputManager input;
     private GameObject currentGrabable;
-
-    private void OnEnable()
-    {
-        input.OnInputDown += HandleClickDown;
-        input.OnInputUp += HandleClickUp;
-    }
-
-    private void OnDisable()
-    {
-        input.OnInputDown -= HandleClickDown;
-        input.OnInputUp -= HandleClickUp;
-    }
-
     private void Awake()
     {
         // Singleton pattern
@@ -30,6 +17,18 @@ public class InteractionManager : MonoBehaviour
         
         Instance = this;
         cam = Camera.main;
+    }
+    
+    private void OnEnable()
+    {
+        input.OnInputDown += HandleClickDown;
+        input.OnInputUp += HandleClickUp;
+    }
+
+    private void OnDisable()
+    {
+        input.OnInputDown -= HandleClickDown;
+        input.OnInputUp -= HandleClickUp;
     }
 
     private void HandleClickDown(Vector2 mousePos)
