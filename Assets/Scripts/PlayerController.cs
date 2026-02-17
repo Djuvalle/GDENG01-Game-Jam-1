@@ -1,45 +1,33 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-class PlayerController : MonoBehaviour
+[RequireComponent(typeof(Rigidbody))]
+public class PlayerController : MonoBehaviour
 {
     private static Vector3 CAMERA_OFFSET = new Vector3(0, 1, 0);
-    [SerializeField] private InputActionReference iarForward;
-    [SerializeField] private InputActionReference iarRightward;
-
-    private float speed = 5f;
-    private Rigidbody2D rb;
-
     private Camera cam;
+    private float speed = 1f;
+    private Rigidbody rb;
+    private Vector2 moveInput;
 
-    void Start()
+
+    private void Start()
     {
-        this.rb = GetComponent<Rigidbody2D>();
+        this.rb = GetComponent<Rigidbody>();
         this.cam = Camera.main;
+        this.cam.transform.localPosition = CAMERA_OFFSET;
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        // Handle movement step
-        float step = speed * Time.deltaTime;
-        float forwardAxis = iarForward.action.ReadValue<float>();
-        float rightwardAxis = iarRightward.action.ReadValue<float>();
+        Vector3 move = cam.transform.forward * moveInput.y + cam.transform.right * moveInput.x;
+        move.y = 0;
+        rb.AddForce(move.normalized * speed, ForceMode.VelocityChange);
 
-        if (forwardAxis != 0)
-        {
-            Vector3 faceDir = this.transform.forward;
-            faceDir = Vector3.Normalize(new Vector3(faceDir.x, 0, faceDir.z)); // Removes vertical direction
-            this.transform.Translate(forwardAxis * step * faceDir);
-        }
+    }
 
-        if (rightwardAxis != 0)
-        {
-            Vector3 rightDir = this.transform.right;
-            rightDir = Vector3.Normalize(new Vector3(rightDir.x, 0, rightDir.z)); // Removes vertical direction
-            this.transform.Translate(rightwardAxis * step *rightDir);
-        }
-
-        // Handle camera position
-        this.cam.transform.position = this.transform.position + CAMERA_OFFSET;
+    void OnMove(InputValue value)
+    {
+        this.moveInput = value.Get<Vector2>();
     }
 }
