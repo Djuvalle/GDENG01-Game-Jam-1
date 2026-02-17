@@ -61,6 +61,7 @@ public class InteractionManager : MonoBehaviour
 
     public static void GrabObject(GameObject obj)
     {
+        obj.GetComponent<Rigidbody>().isKinematic = true;
         Instance.currentGrabable = obj;
     }
 
@@ -69,6 +70,7 @@ public class InteractionManager : MonoBehaviour
         if (Instance.currentGrabable == obj)
         {
             Instance.currentGrabable = null;
+            obj.GetComponent<Rigidbody>().isKinematic = false;
         }
     }
 }
