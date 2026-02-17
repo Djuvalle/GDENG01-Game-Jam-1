@@ -22,8 +22,8 @@ public class CameraController : MonoBehaviour
         transform.localEulerAngles = new Vector3(pitch, transform.localEulerAngles.y, 0f);
     }
 
-    public void OnMouseMove(InputAction.CallbackContext context)
+    private void OnMouseMove(InputValue value)
     {
-        mouseInput = context.ReadValue<Vector2>();
+        mouseInput = value.Get<Vector2>();
     }
 }
