@@ -5,8 +5,9 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     private static Vector3 CAMERA_OFFSET = new Vector3(0, 1, 0);
+    [SerializeField]
+    private float speed;
     private Camera cam;
-    private float speed = 1f;
     private Rigidbody rb;
     private Vector2 moveInput;
 
