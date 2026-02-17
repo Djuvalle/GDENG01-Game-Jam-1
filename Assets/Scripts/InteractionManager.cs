@@ -54,7 +54,7 @@ public class InteractionManager : MonoBehaviour
 
     private void HandleClickUp(Vector2 mousePos)
     {
-        if (currentGrabable != null) return;
+        if (currentGrabable == null) return;
         Clickable clickable = currentGrabable.transform.GetComponent<Clickable>();
         clickable?.OnClickRelease();
     }
