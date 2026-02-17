@@ -19,7 +19,7 @@ public class InteractionManager : MonoBehaviour
         input.OnInputUp -= HandleClickUp;
     }
 
-    private void Start()
+    private void Awake()
     {
         // Singleton pattern
         if (Instance != null && Instance != this)
