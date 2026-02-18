@@ -1,9 +1,11 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 public class InputManager : MonoBehaviour
 {
     public event System.Action<Vector2> OnInputDown;
     public event System.Action<Vector2> OnInputUp;
+    public event System.Action<Vector3> OnPlayerInteract;
 
     public void OnClick(InputValue value)
     {
@@ -16,6 +18,13 @@ public class InputManager : MonoBehaviour
         } else
         {
             OnInputUp?.Invoke(mousePos);
+        }
+    }
+    public void OnInteract(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            OnPlayerInteract?.Invoke(Camera.main.transform.position);
         }
     }
 }
