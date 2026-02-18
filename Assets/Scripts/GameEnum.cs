@@ -20,6 +20,12 @@ namespace GameEnum
         Pancake,
         ButteredPancake
     }
+    public enum FoodState
+    {
+        Raw,
+        Cooked,
+        Burnt
+    }
     public enum CustomerState
     {
         Idle,
