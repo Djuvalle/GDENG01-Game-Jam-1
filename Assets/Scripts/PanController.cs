@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using GameEnum;
 using DG.Tweening;
-public class PanController : MonoBehaviour
+public class PanController : MonoBehaviour, Clickable
 {
     private static float MIN_COOK_TIME = 5f;
     private static float MAX_COOK_TIME = 10f;
@@ -10,7 +10,8 @@ public class PanController : MonoBehaviour
     
     private static List<IngredientType> currentIngredients = new List<IngredientType>();
     private GameObject pancake;
-    private PancakeView pancakeView;
+    private Pancake pancakeView;
+    private ObjectPool pancakePool;
     private float cookTime1 = 0;
     private float cookTime2 = 0;
     private bool isFlipped = false;
@@ -18,7 +19,8 @@ public class PanController : MonoBehaviour
     {
         Debug.Log($"PanController {this.gameObject.name} is running");
         this.pancake = this.transform.Find("Pancake").gameObject;
-        this.pancakeView = new PancakeView(this.pancake);
+        this.pancakeView = this.pancake.GetComponent<Pancake>();
+        this.pancakePool = GlobalObjectPools.GetPoolByFoodType(FoodType.Pancake);
         this.ResetPan();
     }
     private void Update()
@@ -94,5 +96,30 @@ public class PanController : MonoBehaviour
         currentIngredients.Add(ingredient.IngredientType);
         this.HandleIngredientAdded(ingredient.IngredientType);
     }
+    public void OnClicked()
+    {
+        GameObject obj = this.pancakePool.GetObject();
+        Pancake pancakeComp = obj.GetComponent<Pancake>();
+        pancakeComp.Reset();
+        pancakeComp.SetFoodState(this.pancakeView.TopState, false);
+        pancakeComp.SetFoodState(this.pancakeView.BotState, true);
+        pancakeComp.SetActive(true);
+        InteractionManager.GrabObject(obj);
+        this.ResetPan();
+    }
+    public void OnClickRelease()
+    {
+        
+    }
+    private void OnInteract()
+    {
+        if (currentIngredients.Contains(IngredientType.Batter))
+        {
+            isFlipped = !isFlipped;
+            this.pancake.transform.DORotate(new Vector3(0, isFlipped ? 180 : 0, 0), 0.2f).SetLoops(3, LoopType.Incremental);
+            this.pancake.transform.DOMoveY(this.pancake.transform.position.y + 0.1f, 0.6f);
+        }
+    }
+
     
 }
