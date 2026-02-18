@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5958503365689430219}
   - component: {fileID: 1889806840927094549}
   - component: {fileID: 8299388546407082575}
+  - component: {fileID: -8278947145487836355}
   m_Layer: 0
   m_Name: Flour
   m_TagString: Untagged
@@ -154,3 +155,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
   ingredientType: 0
+--- !u!114 &-8278947145487836355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8265613483410985854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2d3d7941e57dd04686852abf1ef5d51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Grabber

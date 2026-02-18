@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1577981031438393955}
   - component: {fileID: 8965271537745564005}
   - component: {fileID: 1087210584606835839}
+  - component: {fileID: -71107174444377579}
   m_Layer: 0
   m_Name: Batter
   m_TagString: Untagged
@@ -154,3 +155,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
   ingredientType: 2
+--- !u!114 &-71107174444377579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5261130476978336958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2d3d7941e57dd04686852abf1ef5d51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Grabber

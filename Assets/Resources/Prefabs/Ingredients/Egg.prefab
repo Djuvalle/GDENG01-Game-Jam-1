@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2719230470199890570}
   - component: {fileID: 5532917298964132244}
   - component: {fileID: 4652048191164634423}
+  - component: {fileID: 1559482229298179010}
   m_Layer: 0
   m_Name: Egg
   m_TagString: Untagged
@@ -154,3 +155,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
   ingredientType: 1
+--- !u!114 &1559482229298179010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6528238258820769621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2d3d7941e57dd04686852abf1ef5d51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Grabber
