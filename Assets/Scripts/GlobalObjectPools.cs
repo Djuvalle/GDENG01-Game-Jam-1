@@ -9,6 +9,7 @@ public class GlobalObjectPools : MonoBehaviour
     private ObjectPool EggPool { get; set; }
     private ObjectPool FlourPool { get; set; }
     private ObjectPool ButterPool { get; set; }
+    private ObjectPool PancakePool { get; set; }
     
     private void Awake()
     {
@@ -18,12 +19,18 @@ public class GlobalObjectPools : MonoBehaviour
             return;
         }
         
-        string PREFAB_PATH = "Prefabs/Ingredients/";
+        string PREFAB_PATH = "Prefabs/";
+        string PREFAB_INGREDIENTS_PATH = PREFAB_PATH + "Ingredients/";
+        string PREFAB_FOOD_PATH = PREFAB_PATH + "Food/";
+        
 
-        this.BatterPool = new ObjectPool(Resources.Load<GameObject>(PREFAB_PATH + "Batter"));
-        this.EggPool = new ObjectPool(Resources.Load<GameObject>(PREFAB_PATH + "Egg"));
-        this.FlourPool = new ObjectPool(Resources.Load<GameObject>(PREFAB_PATH + "Flour"));
-        this.ButterPool = new ObjectPool(Resources.Load<GameObject>(PREFAB_PATH + "Butter"));
+        this.BatterPool = new ObjectPool(Resources.Load<GameObject>(PREFAB_INGREDIENTS_PATH + "Batter"));
+        this.EggPool = new ObjectPool(Resources.Load<GameObject>(PREFAB_INGREDIENTS_PATH + "Egg"));
+        this.FlourPool = new ObjectPool(Resources.Load<GameObject>(PREFAB_INGREDIENTS_PATH + "Flour"));
+        this.ButterPool = new ObjectPool(Resources.Load<GameObject>(PREFAB_INGREDIENTS_PATH + "Butter"));
+
+        this.PancakePool = new ObjectPool(Resources.Load<GameObject>(PREFAB_FOOD_PATH + "Pancake"));
+
         Instance = this;
     }
 
@@ -43,5 +50,18 @@ public class GlobalObjectPools : MonoBehaviour
                 Debug.LogError($"No pool found for ingredient type: {type}");
                 return null;
         }
+    }
+
+    public static ObjectPool GetPoolByFoodType(FoodType type)
+    {
+        switch (type)
+        {
+            case FoodType.Pancake:
+                return Instance.PancakePool;
+            default:
+                Debug.LogError($"No pool found for ingredient type: {type}");
+                return null;
+        }
+        
     }
 }
