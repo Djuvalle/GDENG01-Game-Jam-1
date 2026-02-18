@@ -1,3 +1,5 @@
+using System;
+using GameEnum;
 using Unity.VisualScripting;
 using UnityEngine;
 public class InteractionManager : MonoBehaviour
@@ -31,12 +33,14 @@ public class InteractionManager : MonoBehaviour
     {
         input.OnInputDown += HandleClickDown;
         input.OnInputUp += HandleClickUp;
+        input.OnPlayerInteract += HandleInteract;
     }
 
     private void OnDisable()
     {
         input.OnInputDown -= HandleClickDown;
         input.OnInputUp -= HandleClickUp;
+        input.OnPlayerInteract -= HandleInteract;
     }
 
     private void HandleClickDown(Vector2 mousePos)
@@ -56,6 +60,15 @@ public class InteractionManager : MonoBehaviour
         if (currentGrabable == null) return;
         Clickable clickable = currentGrabable.transform.GetComponent<Clickable>();
         clickable?.OnClickRelease();
+    }
+
+    private void HandleInteract(Vector3 camPos)
+    {
+        Parameters parameters = new Parameters();
+        parameters.PutExtra("x", camPos.x);
+        parameters.PutExtra("y", camPos.y);
+        parameters.PutExtra("z", camPos.z);
+        EventBroadcaster.Instance.PostEvent(ActionEvent.Interacted.ToString(), parameters);
     }
 
     public static void GrabObject(GameObject obj)
