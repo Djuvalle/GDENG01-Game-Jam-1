@@ -4,6 +4,7 @@ using GameEnum;
 public class ProximityPrompt : MonoBehaviour
 {
     private static float ACTIVATION_RANGE = 3;
+    public System.Action<Vector3> OnInteract;
     private Camera cam;
     private bool isEnabled = true;
     private bool isInView = false;
