@@ -15,12 +15,14 @@ public class PanController : MonoBehaviour, Clickable
     private float cookTime1 = 0;
     private float cookTime2 = 0;
     private bool isFlipped = false;
+    private ProximityPrompt proximityPromptView;
     private void Start()
     {
         Debug.Log($"PanController {this.gameObject.name} is running");
         this.pancake = this.transform.Find("Pancake").gameObject;
         this.pancakeView = this.pancake.GetComponent<Pancake>();
         this.pancakePool = GlobalObjectPools.GetPoolByFoodType(FoodType.Pancake);
+        this.proximityPromptView = this.transform.Find("ProximityPrompt").gameObject.GetComponent<ProximityPrompt>();
         this.ResetPan();
     }
     private void Update()
@@ -50,6 +52,7 @@ public class PanController : MonoBehaviour, Clickable
     {
         currentIngredients.Clear();
         this.pancakeView.Reset();
+        this.proximityPromptView.SetEnabled(false);
         this.cookTime1 = 0;
         this.cookTime2 = 0;
         this.isFlipped = false;
@@ -94,6 +97,7 @@ public class PanController : MonoBehaviour, Clickable
         }
         ingredient.ReturnIngredient();
         currentIngredients.Add(ingredient.IngredientType);
+        this.proximityPromptView.SetEnabled(true);
         this.HandleIngredientAdded(ingredient.IngredientType);
     }
     public void OnClicked()
