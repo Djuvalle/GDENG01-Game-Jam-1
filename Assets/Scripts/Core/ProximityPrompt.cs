@@ -1,11 +1,13 @@
 using UnityEngine;
 using GameEnum;
-
+using TMPro;
+[DefaultExecutionOrder(-10)]
 public class ProximityPrompt : MonoBehaviour
 {
     private static float ACTIVATION_RANGE = 3;
     public System.Action<Vector3> OnInteract;
     private Camera cam;
+    private TextMeshProUGUI textObj;
     private bool isEnabled = true;
     private bool isInView = false;
     public void OnInteracted(Parameters parameters)
@@ -23,14 +25,15 @@ public class ProximityPrompt : MonoBehaviour
         }
         this.OnInteract?.Invoke(sourcePos);
     }
-    private void Start()
+    private void Awake()
     {
         //Debug.Log("ProximityPrompt is running");
         this.cam = Camera.main;
+        GameObject textCon = this.transform.Find("Text (TMP)").gameObject;
+        this.textObj = textCon.GetComponent<TextMeshProUGUI>();
         EventBroadcaster.Instance.AddObserver(ActionEvent.Interacted.ToString(), this.OnInteracted);
 
-
-
+        Debug.Log($"TextObj Check: {this.textObj}");
         //Debug.Log("ProximityPrompt is finished");
     }
 
