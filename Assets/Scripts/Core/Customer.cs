@@ -7,7 +7,6 @@ public class Customer: MonoBehaviour
 {
     private static float MAX_PATIENCE_TIMER = 120f; //2 mins
     private Animator animator;
-    private Rigidbody rigidbody;
     private List<FoodType> orderList;
     private float patienceTimer;
     public float orderCooldown { get; set; } = 0;
@@ -19,7 +18,6 @@ public class Customer: MonoBehaviour
     private void Start()
     {
         this.animator = this.gameObject.GetComponent<Animator>();
-        this.rigidbody = this.gameObject.GetComponent<Rigidbody>();
     }
     private void Update() {
         if (this.state == CustomerState.Order)
@@ -93,16 +91,18 @@ public class Customer: MonoBehaviour
             this.Leave(OrderState.Success);
         }
     }
-    public void MoveToPoint(Vector3 targetPos, TweenCallback callback)
+    public void MoveToPoint(Vector3 targetPos, Vector3 targetRot, TweenCallback callback)
     {
-        float mag = (targetPos - this.transform.position).magnitude;
+        Vector3 dir = (targetPos - this.transform.position);
+        float mag = dir.magnitude;
         float SPEED = 2;
-        this.animator.SetBool("isWalking", true);
-        this.rigidbody.DOLookAt(targetPos, 0.5f, AxisConstraint.Y);
-        this.rigidbody.DOMove(targetPos, mag / SPEED)
+        //this.animator.SetBool("isWalking", true);
+        //this.transform.DOLookAt(targetPos, 0.5f, AxisConstraint.Z);
+        this.transform.DORotate(targetRot, 0.5f);
+        this.transform.DOMove(targetPos, mag / SPEED)
         .OnComplete(() =>
         {
-            this.animator.SetBool("isWalking", false);
+            //this.animator.SetBool("isWalking", false);
             if (callback != null)
                 callback();
         });
