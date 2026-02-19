@@ -23,15 +23,19 @@ public class CustomerManager : MonoBehaviour
         float MIN = 60, MAX = 120;
         for (int i = 0; i < lenght; i++)
         {
-            Customer customer = this.Customers[i].GetComponent<Customer>();
+            GameObject customerObj = this.Customers[i];
+            Renderer renderer = customerObj.GetComponent<MeshRenderer>();
+            Customer customer = customerObj.GetComponent<Customer>();
             customer.OnOrderReady += () =>
             {
                 customer.orderCooldown = Random.Range(MIN, MAX);
                 customer.StartOrdering();
+                renderer.enabled = true;
             };
             customer.OnLeaving += (orderState) =>
             {
                 Debug.Log($"Customer {i}: Leaving with order state: {orderState}");
+                renderer.enabled = false;
             };
             customer.orderCooldown = i * 30;
             customer.StartInCooldown();
