@@ -3,7 +3,9 @@ namespace GameEnum
     public enum ActionEvent
     {
         IngredientAdded,
-        Interacted
+        Interacted,
+        CustomerServed,
+        UpdateView
     }
     public enum ParameterKey
     {
