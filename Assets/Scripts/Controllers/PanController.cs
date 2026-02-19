@@ -6,9 +6,9 @@ public class PanController : MonoBehaviour, Clickable
 {
     private static float MIN_COOK_TIME = 5f;
     private static float MAX_COOK_TIME = 10f;
-    private static List<IngredientType> ACCEPTABLE_INGREDIENTS = new List<IngredientType>() { IngredientType.Batter, IngredientType.Butter };
+    private static List<IngredientType> ACCEPTABLE_INGREDIENTS = new List<IngredientType>() { IngredientType.Batter };
     
-    private static List<IngredientType> currentIngredients = new List<IngredientType>();
+    private List<IngredientType> currentIngredients = new List<IngredientType>();
     private GameObject pancake;
     private Pancake pancakeView;
     private ObjectPool pancakePool;
