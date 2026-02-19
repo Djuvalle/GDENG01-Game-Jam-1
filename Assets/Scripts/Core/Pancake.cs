@@ -63,4 +63,8 @@ public class Pancake: MonoBehaviour
             this.Bot.GetComponent<Renderer>().material = targetMat;
         }
     }
+    public bool IsCookedProperly()
+    {
+        return this.TopState == FoodState.Cooked && this.BotState == FoodState.Cooked;
+    }
 }
