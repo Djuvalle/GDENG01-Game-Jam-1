@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using GameEnum;
 using DG.Tweening;
+[DefaultExecutionOrder(1000)]
 public class PanController : MonoBehaviour, Clickable
 {
     private static float MIN_COOK_TIME = 5f;
@@ -24,6 +25,7 @@ public class PanController : MonoBehaviour, Clickable
         this.pancakeView = this.pancake.GetComponent<Pancake>();
         this.pancakePool = GlobalObjectPools.GetPoolByFoodType(FoodType.Pancake);
         this.proximityPromptView = this.transform.Find("ProximityPrompt").gameObject.GetComponent<ProximityPrompt>();
+        this.proximityPromptView.SetText("[E] Flip Pancake");
         this.proximityPromptView.OnInteract += HandleInteract;
         this.ResetPan();
     }
