@@ -36,27 +36,20 @@ public class ProximityPrompt : MonoBehaviour
     {
         Vector3 viewPos = cam.WorldToViewportPoint(this.transform.position);
         if (viewPos.x >= 0 && viewPos.x <= 1 && viewPos.y >= 0 && viewPos.y <= 1)
-        {
             this.isInView = true;
-        }
         else
-        {
             this.isInView = false;
-        }
 
         if (this.isEnabled && this.isInView && (this.transform.position - cam.transform.position).magnitude <= ACTIVATION_RANGE)
-        {
             this.GetComponent<Canvas>().enabled = true;
-        }
         else
-        {
             this.GetComponent<Canvas>().enabled = false;
-        }
+
         Debug.Log($"Is in view: {this.isInView}; Is Enabled: {this.isEnabled}; Canvas is in range: {this.GetComponent<Canvas>().enabled}");
     }
 
     public void SetEnabled(bool state)
     {
-        this.enabled = state;
+        this.isEnabled = state;
     }
 }
