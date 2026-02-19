@@ -26,7 +26,7 @@ public class Customer: MonoBehaviour
             if (patienceTimer <= 0) {
                 this.Leave(OrderState.Failure);
             }
-            Debug.Log($"Customer: Patience draining... {patienceTimer}");
+            //Debug.Log($"Customer: Patience draining... {patienceTimer}");
         }
         else if (this.state == CustomerState.Cooldown && this.resumeOrderCooldown)
         {
@@ -35,7 +35,7 @@ public class Customer: MonoBehaviour
             {
                 this.OrderReady();
             }
-            Debug.Log($"Customer: Cooldown... {orderCooldown}");
+            //Debug.Log($"Customer: Cooldown... {orderCooldown}");
         }
     }
     private static List<FoodType> GenerateOrder() {
