@@ -48,6 +48,10 @@ public class CustomerManager : MonoBehaviour
                     //renderer.enabled = false;
                     bone.SetActive(false);
                 });
+                if (orderState == OrderState.Success)
+                {
+                    EventBroadcaster.Instance.PostEvent(ActionEvent.CustomerServed.ToString());
+                }
                 
             };
             customer.orderCooldown = 10 + i * 30;
