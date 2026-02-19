@@ -4,8 +4,8 @@ using UnityEngine.SceneManagement;
 [DefaultExecutionOrder(999999)] // We want this last, and get order systems ready
 public class GameMain: MonoBehaviour
 {
-    private static int TOTAL_TO_SERVE = 25;
-    private int amountServed = 0;
+    private static int TOTAL_TO_SERVE = 5;
+    private int amountServed = -1;
     private bool isWin = false;
     private float timeBeforeReturning = 5;
     private void Start()
@@ -16,6 +16,7 @@ public class GameMain: MonoBehaviour
         // Set up customers
         // Start countdown
         EventBroadcaster.Instance.AddObserver(ActionEvent.CustomerServed.ToString(), this.HandleCustomerServed);
+        HandleCustomerServed();
         CustomerManager.SetResumeCustomerOrdering(true);
     }
     private void Update()
@@ -29,12 +30,13 @@ public class GameMain: MonoBehaviour
             SceneManager.LoadScene("StartScene");
     }
 
-    private void HandleCustomerServed(Parameters parameters)
+    private void HandleCustomerServed()
     {
+        Debug.Log("Objective updated");
         amountServed++;
         Parameters parameterToSend = new Parameters();
         parameterToSend.PutExtra("Current", amountServed);
-        parameterToSend.PutExtra("Goal", amountServed);
+        parameterToSend.PutExtra("Goal", TOTAL_TO_SERVE);
         
         if (amountServed >= TOTAL_TO_SERVE)
         {
