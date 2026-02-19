@@ -33,7 +33,7 @@ namespace GameEnum
         Order,
         Leave,
     }
-    public enum ActionState
+    public enum OrderState
     {
         Success,
         Failure
