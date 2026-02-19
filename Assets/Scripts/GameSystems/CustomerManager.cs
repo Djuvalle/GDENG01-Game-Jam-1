@@ -1,9 +1,14 @@
 using UnityEngine;
 using GameEnum;
+using System.Collections.Generic;
 public class CustomerManager : MonoBehaviour
 {
     [SerializeField] private GameObject customerStart;
     [SerializeField] private GameObject seat1;
+    [SerializeField] private GameObject seat2;
+    [SerializeField] private GameObject seat3;
+    [SerializeField] private GameObject seat4;
+    private GameObject[] seats;
     public static CustomerManager Instance;
     private GameObject[] Customers;
     
@@ -19,6 +24,11 @@ public class CustomerManager : MonoBehaviour
     }
     private void Start()
     {
+        this.seats[0] = seat1;
+        this.seats[1] = seat2;
+        this.seats[2] = seat3;
+        this.seats[3] = seat4;
+
         this.Customers = GameObject.FindGameObjectsWithTag("Customer");
         int lenght = this.Customers.Length;
         Debug.Log($"Running CustomerManager with {lenght} Customers");
@@ -38,7 +48,7 @@ public class CustomerManager : MonoBehaviour
                 bone.SetActive(true);
                 customer.StartOrdering();
                 customer.orderCooldown = Random.Range(MIN_ORDER_COOLDOWN, MAX_ORDER_COOLDOWN);
-                customer.MoveToPoint(seat1.transform.position, new Vector3(-90, 180),null);
+                customer.MoveToPoint(this.seats[i].transform.position, new Vector3(-90, 180),null);
                 //renderer.enabled = true;
             };
             customer.OnLeaving += (orderState) =>
