@@ -33,7 +33,7 @@ public class ProximityPrompt : MonoBehaviour
         this.textObj = textCon.GetComponent<TextMeshProUGUI>();
         EventBroadcaster.Instance.AddObserver(ActionEvent.Interacted.ToString(), this.OnInteracted);
 
-        Debug.Log($"TextObj Check: {this.textObj}");
+        //Debug.Log($"TextObj Check: {this.textObj}");
         //Debug.Log("ProximityPrompt is finished");
     }
 
