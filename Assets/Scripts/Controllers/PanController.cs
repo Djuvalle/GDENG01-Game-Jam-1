@@ -15,6 +15,7 @@ public class PanController : MonoBehaviour, Clickable
     private float cookTime1 = 0;
     private float cookTime2 = 0;
     private bool isFlipped = false;
+    private bool debounceFlip = false;
     private ProximityPrompt proximityPromptView;
     private void Start()
     {
@@ -23,6 +24,7 @@ public class PanController : MonoBehaviour, Clickable
         this.pancakeView = this.pancake.GetComponent<Pancake>();
         this.pancakePool = GlobalObjectPools.GetPoolByFoodType(FoodType.Pancake);
         this.proximityPromptView = this.transform.Find("ProximityPrompt").gameObject.GetComponent<ProximityPrompt>();
+        this.proximityPromptView.OnInteract += HandleInteract;
         this.ResetPan();
     }
     private void Update()
@@ -115,13 +117,16 @@ public class PanController : MonoBehaviour, Clickable
     {
         
     }
-    private void OnInteract()
+    private void HandleInteract(Vector3 vector3)
     {
-        if (currentIngredients.Contains(IngredientType.Batter))
+        if (currentIngredients.Contains(IngredientType.Batter) && !this.debounceFlip)
         {
+            this.debounceFlip = true;
             isFlipped = !isFlipped;
-            this.pancake.transform.DORotate(new Vector3(0, isFlipped ? 180 : 0, 0), 0.2f).SetLoops(3, LoopType.Incremental);
-            this.pancake.transform.DOMoveY(this.pancake.transform.position.y + 0.1f, 0.6f);
+            this.pancake.transform.DORotate(new Vector3(isFlipped ? 180 : 0, 0,  0), 0.2f).SetLoops(3, LoopType.Incremental);
+            this.pancake.transform.DOMoveY(this.pancake.transform.position.y + 0.5f, 0.3f)
+                .SetLoops(2, LoopType.Yoyo)
+                .OnComplete(() => this.debounceFlip = false);
         }
     }
 
