@@ -77,6 +77,7 @@ public class Customer: MonoBehaviour
         }
 
         this.orderList.Remove(food);
+        pancake.ReturnToPool();
         Debug.Log("Customer accepted the food");
         if (this.orderList.Count == 0) {
             this.Leave(OrderState.Success);
