@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 [DefaultExecutionOrder(999999)] // We want this last, and get order systems ready
 public class GameMain: MonoBehaviour
 {
-    private static int TOTAL_TO_SERVE = 5;
+    private static int TOTAL_TO_SERVE = 10;
     private int amountServed = -1;
     private bool isWin = false;
     private float timeBeforeReturning = 5;
