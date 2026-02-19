@@ -67,4 +67,9 @@ public class Pancake: MonoBehaviour
     {
         return this.TopState == FoodState.Cooked && this.BotState == FoodState.Cooked;
     }
+    public void ReturnToPool()
+    {
+        ObjectPool pool = GlobalObjectPools.GetPoolByFoodType(FoodType.Pancake);
+        pool.ReturnObject(this.gameObject);
+    }
 }
