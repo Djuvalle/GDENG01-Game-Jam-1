@@ -6,8 +6,8 @@ using System;
 [DefaultExecutionOrder(1000)]
 public class MixerController : MonoBehaviour, Clickable
 {
-    private static float MIN_COOK_TIME = 5f;
-    private static float MAX_COOK_TIME = 10f;
+    //private static float MIN_COOK_TIME = 5f;
+    //private static float MAX_COOK_TIME = 10f;
     private static List<IngredientType> REQUIRED_IGREDIENTS = new List<IngredientType>() { IngredientType.Flour, IngredientType.Egg, IngredientType.Egg };
 
     private List<IngredientType> currentIngredients = new List<IngredientType>();
