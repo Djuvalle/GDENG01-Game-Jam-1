@@ -29,6 +29,7 @@ namespace GameEnum
     }
     public enum CustomerState
     {
+        Cooldown,
         Idle,
         Order,
         Leave,
