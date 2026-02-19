@@ -2,6 +2,8 @@ using UnityEngine;
 using GameEnum;
 public class CustomerManager : MonoBehaviour
 {
+    [SerializeField] private GameObject customerStart;
+    [SerializeField] private GameObject seat1;
     public static CustomerManager Instance;
     private GameObject[] Customers;
     
@@ -29,16 +31,21 @@ public class CustomerManager : MonoBehaviour
             Customer customer = customerObj.GetComponent<Customer>();
             customer.OnOrderReady += () =>
             {
-                customer.orderCooldown = Random.Range(MIN_ORDER_COOLDOWN, MAX_ORDER_COOLDOWN);
-                customer.StartOrdering();
+                Debug.Log($"On Order Ready Invoked");
                 renderer.enabled = true;
+                customer.StartOrdering();
+                customer.orderCooldown = Random.Range(MIN_ORDER_COOLDOWN, MAX_ORDER_COOLDOWN);
+                customer.MoveToPoint(seat1.transform.position, null);
+                //renderer.enabled = true;
             };
             customer.OnLeaving += (orderState) =>
             {
                 Debug.Log($"Customer {i}: Leaving with order state: {orderState}");
-                renderer.enabled = false;
+                customer.MoveToPoint(customerStart.transform.position, () => renderer.enabled = false);
+                
             };
             customer.orderCooldown = i * 30;
+            customer.transform.position = customer.transform.position;
             customer.StartInCooldown();
         }
     }
