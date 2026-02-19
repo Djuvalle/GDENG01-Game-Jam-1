@@ -43,7 +43,7 @@ public class ObjectPool
         } 
         else
         {
-            Debug.LogError($"Trying to return an object that is not active in the pool: {obj.name}");
+            Debug.LogError($"Trying to return an object \"{obj.name}\" that is not active in the pool: {this.prefab.name}");
         }
     }
 }
