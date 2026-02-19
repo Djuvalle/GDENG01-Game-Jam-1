@@ -20,7 +20,8 @@ public class CustomerManager : MonoBehaviour
         this.Customers = GameObject.FindGameObjectsWithTag("Customer");
         int lenght = this.Customers.Length;
 
-        float MIN = 60, MAX = 120;
+        float MIN_ORDER_COOLDOWN = 20; // 60
+        float MAX_ORDER_COOLDOWN = 40; // 120
         for (int i = 0; i < lenght; i++)
         {
             GameObject customerObj = this.Customers[i];
@@ -28,7 +29,7 @@ public class CustomerManager : MonoBehaviour
             Customer customer = customerObj.GetComponent<Customer>();
             customer.OnOrderReady += () =>
             {
-                customer.orderCooldown = Random.Range(MIN, MAX);
+                customer.orderCooldown = Random.Range(MIN_ORDER_COOLDOWN, MAX_ORDER_COOLDOWN);
                 customer.StartOrdering();
                 renderer.enabled = true;
             };
