@@ -4,13 +4,13 @@ public class Grabber : MonoBehaviour, Clickable
 {
     public void OnClicked()
     {
-        Debug.Log($"Ingredient {this.gameObject.name} was clicked");
+        Debug.Log($"Grabber: {this.gameObject.name} was clicked");
         InteractionManager.GrabObject(this.gameObject);
     }
 
     public void OnClickRelease()
     {
-        Debug.Log($"Ingredient {this.gameObject.name} click released");
+        Debug.Log($"Grabber: {this.gameObject.name} click released");
         InteractionManager.ReleaseObject(this.gameObject);
     }
 }
