@@ -24,6 +24,7 @@ public class CustomerManager : MonoBehaviour
     }
     private void Start()
     {
+        this.seats = new GameObject[4];
         this.seats[0] = seat1;
         this.seats[1] = seat2;
         this.seats[2] = seat3;
@@ -37,23 +38,24 @@ public class CustomerManager : MonoBehaviour
         float MAX_ORDER_COOLDOWN = 40; // 120
         for (int i = 0; i < lenght; i++)
         {
-            GameObject customerObj = this.Customers[i];
+            int curIdx = i;
+            GameObject customerObj = this.Customers[curIdx];
             //Renderer renderer = customerObj.GetComponent<MeshRenderer>();
             GameObject bone = customerObj.transform.Find("Bone").gameObject;
             Customer customer = customerObj.GetComponent<Customer>();
             customer.OnOrderReady += () =>
             {
-                Debug.Log($"On Order Ready Invoked");
+                Debug.Log($"On Order Ready Invoked {curIdx}");
                 //renderer.enabled = true;
                 bone.SetActive(true);
                 customer.StartOrdering();
                 customer.orderCooldown = Random.Range(MIN_ORDER_COOLDOWN, MAX_ORDER_COOLDOWN);
-                customer.MoveToPoint(this.seats[i].transform.position, new Vector3(-90, 180),null);
+                customer.MoveToPoint(this.seats[curIdx].transform.position, new Vector3(-90, 180),null);
                 //renderer.enabled = true;
             };
             customer.OnLeaving += (orderState) =>
             {
-                Debug.Log($"Customer {i}: Leaving with order state: {orderState}");
+                Debug.Log($"Customer {curIdx}: Leaving with order state: {orderState}");
                 customer.MoveToPoint(customerStart.transform.position, new Vector3(-90, 0), () => {
                     //renderer.enabled = false;
                     bone.SetActive(false);
@@ -64,7 +66,7 @@ public class CustomerManager : MonoBehaviour
                 }
                 
             };
-            customer.orderCooldown = 10 + i * 30;
+            customer.orderCooldown = 10 + curIdx * 30;
             customer.transform.position = customerStart.transform.position;
             customer.StartInCooldown();
         }
