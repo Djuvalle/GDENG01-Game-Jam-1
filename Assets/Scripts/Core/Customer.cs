@@ -20,6 +20,7 @@ public class Customer: MonoBehaviour
             if (patienceTimer <= 0) {
                 this.Leave(OrderState.Failure);
             }
+            Debug.Log($"Customer: Patience draining... {patienceTimer}");
         }
         else if (this.state == CustomerState.Cooldown && this.resumeOrderCooldown)
         {
@@ -28,6 +29,7 @@ public class Customer: MonoBehaviour
             {
                 this.OrderReady();
             }
+            Debug.Log($"Customer: Cooldown... {orderCooldown}");
         }
     }
     private static List<FoodType> GenerateOrder() {
@@ -40,11 +42,13 @@ public class Customer: MonoBehaviour
         this.orderList = GenerateOrder();
         this.patienceTimer = MAX_PATIENCE_TIMER;
         this.state = CustomerState.Order;
+        Debug.Log("Customer has started ordering");
     }
     public void StartInCooldown()
     {
         this.state = CustomerState.Cooldown;
         this.resumeOrderCooldown = true;
+        Debug.Log("Customer has started in cooldown");
     }
     private void OrderReady()
     {
@@ -52,6 +56,7 @@ public class Customer: MonoBehaviour
         this.OnOrderReady?.Invoke();
     }
     private void Leave(OrderState orderState) {
+        Debug.Log($"Customer is leaving with state: {orderState}");
         this.state = CustomerState.Leave;
         this.OnLeaving?.Invoke(orderState);
         this.state = CustomerState.Cooldown;
@@ -72,6 +77,7 @@ public class Customer: MonoBehaviour
         }
 
         this.orderList.Remove(food);
+        Debug.Log("Customer accepted the food");
         if (this.orderList.Count == 0) {
             this.Leave(OrderState.Success);
         }
