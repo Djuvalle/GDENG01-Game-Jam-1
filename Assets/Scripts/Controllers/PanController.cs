@@ -54,6 +54,7 @@ public class PanController : MonoBehaviour, Clickable
     {
         currentIngredients.Clear();
         this.pancakeView.Reset();
+        this.pancake.transform.eulerAngles = new Vector3(0, 0, 0);
         this.proximityPromptView.SetEnabled(false);
         this.cookTime1 = 0;
         this.cookTime2 = 0;
@@ -128,7 +129,7 @@ public class PanController : MonoBehaviour, Clickable
             this.debounceFlip = true;
             isFlipped = !isFlipped;
             this.pancake.transform.DORotate(new Vector3(isFlipped ? 180 : 0, 0,  0), 0.2f).SetLoops(3, LoopType.Incremental);
-            this.pancake.transform.DOMoveY(this.pancake.transform.position.y + 0.5f, 0.3f)
+            this.pancake.transform.DOMoveY(this.pancake.transform.position.y + 0.5f, 0.35f)
                 .SetLoops(2, LoopType.Yoyo)
                 .OnComplete(() => this.debounceFlip = false);
         }
