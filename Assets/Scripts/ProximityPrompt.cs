@@ -16,11 +16,12 @@ public class ProximityPrompt : MonoBehaviour
         Vector3 sourcePos = new Vector3(x, y, z);
         Debug.Log($"ProximityPrompt received event with parameter value: {sourcePos}");
 
-        // Do not accept if too far
-        if ((this.transform.position - sourcePos).magnitude > ACTIVATION_RANGE)
+        // Do not accept if too far or not in view
+        if ((this.transform.position - sourcePos).magnitude > ACTIVATION_RANGE || !this.isInView)
         {
             return;
         }
+        this.OnInteract?.Invoke(sourcePos);
     }
     private void Start()
     {
