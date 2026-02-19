@@ -6,7 +6,7 @@ using DG.Tweening;
 public class PanController : MonoBehaviour, Clickable
 {
     private static float MIN_COOK_TIME = 5f;
-    private static float MAX_COOK_TIME = 10f;
+    private static float MAX_COOK_TIME = 20f;
     private static List<IngredientType> ACCEPTABLE_INGREDIENTS = new List<IngredientType>() { IngredientType.Batter };
     
     private List<IngredientType> currentIngredients = new List<IngredientType>();
