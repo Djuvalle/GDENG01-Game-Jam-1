@@ -2,17 +2,25 @@ using UnityEngine;
 using System.Collections;
 using GameEnum;
 using System.Collections.Generic;
+using DG.Tweening;
 public class Customer: MonoBehaviour
 {
     private static float MAX_PATIENCE_TIMER = 120f; //2 mins
+    private Animator animator;
+    private Rigidbody rigidbody;
     private List<FoodType> orderList;
     private float patienceTimer;
-    public float orderCooldown { get; set; }
+    public float orderCooldown { get; set; } = 0;
     public bool resumeOrderCooldown { get; set; } = false;
     private CustomerState state = CustomerState.Idle;
     public System.Action OnOrderReady;
     public System.Action<OrderState> OnLeaving;
 
+    private void Start()
+    {
+        this.animator = this.gameObject.GetComponent<Animator>();
+        this.rigidbody = this.gameObject.GetComponent<Rigidbody>();
+    }
     private void Update() {
         if (this.state == CustomerState.Order)
         {
@@ -63,6 +71,7 @@ public class Customer: MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("Collision detected");
         Pancake pancake = collision.gameObject.GetComponent<Pancake>();
         // If it is not a food item or it is not cooked
         if (!pancake || !pancake.IsCookedProperly())
@@ -73,6 +82,7 @@ public class Customer: MonoBehaviour
         if (this.state != CustomerState.Order || !this.orderList.Contains(food))
         {
             // Do not accept food
+            Debug.Log($"Failed 2nd gate at state: {this.state}");
             return;
         }
 
@@ -82,5 +92,19 @@ public class Customer: MonoBehaviour
         if (this.orderList.Count == 0) {
             this.Leave(OrderState.Success);
         }
+    }
+    public void MoveToPoint(Vector3 targetPos, TweenCallback callback)
+    {
+        float mag = (targetPos - this.transform.position).magnitude;
+        float SPEED = 2;
+        this.animator.SetBool("isWalking", true);
+        this.rigidbody.DOLookAt(targetPos, 0.5f, AxisConstraint.Y);
+        this.rigidbody.DOMove(targetPos, mag / SPEED)
+        .OnComplete(() =>
+        {
+            this.animator.SetBool("isWalking", false);
+            if (callback != null)
+                callback();
+        });
     }
 }
