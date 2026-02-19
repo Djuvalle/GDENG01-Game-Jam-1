@@ -104,6 +104,10 @@ public class PanController : MonoBehaviour, Clickable
     }
     public void OnClicked()
     {
+        if (!this.currentIngredients.Contains(IngredientType.Batter))
+        {
+            return;    
+        }
         GameObject obj = this.pancakePool.GetObject();
         Pancake pancakeComp = obj.GetComponent<Pancake>();
         pancakeComp.Reset();
