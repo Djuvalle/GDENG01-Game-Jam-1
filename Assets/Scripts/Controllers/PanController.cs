@@ -19,7 +19,7 @@ public class PanController : MonoBehaviour, Clickable
     private ProximityPrompt proximityPromptView;
     private void Start()
     {
-        Debug.Log($"PanController {this.gameObject.name} is running");
+        //Debug.Log($"PanController {this.gameObject.name} is running");
         this.pancake = this.transform.Find("Pancake").gameObject;
         this.pancakeView = this.pancake.GetComponent<Pancake>();
         this.pancakePool = GlobalObjectPools.GetPoolByFoodType(FoodType.Pancake);
@@ -41,12 +41,12 @@ public class PanController : MonoBehaviour, Clickable
 
         if (!isFlipped && cookTime1 >= MAX_COOK_TIME || isFlipped && cookTime2 >= MAX_COOK_TIME)
         {
-            Debug.Log("Pancake is burnt!");
+            //Debug.Log("Pancake is burnt!");
             this.pancakeView.SetFoodState(FoodState.Burnt, isFlipped);
         }
         else if (!isFlipped && cookTime1 >= MIN_COOK_TIME || isFlipped && cookTime2 >= MIN_COOK_TIME)
         {
-            Debug.Log("Pancake is cooked!");
+            //Debug.Log("Pancake is cooked!");
             this.pancakeView.SetFoodState(FoodState.Cooked, isFlipped);
         }
     }
