@@ -14,7 +14,7 @@ public class ProximityPrompt : MonoBehaviour
         float y = parameters.GetFloatExtra("y", 0);
         float z = parameters.GetFloatExtra("z", 0);
         Vector3 sourcePos = new Vector3(x, y, z);
-        Debug.Log($"ProximityPrompt received event with parameter value: {sourcePos}");
+        //Debug.Log($"ProximityPrompt received event with parameter value: {sourcePos}");
 
         // Do not accept if too far or not in view
         if ((this.transform.position - sourcePos).magnitude > ACTIVATION_RANGE || !this.isInView)
@@ -25,13 +25,13 @@ public class ProximityPrompt : MonoBehaviour
     }
     private void Start()
     {
-        Debug.Log("ProximityPrompt is running");
+        //Debug.Log("ProximityPrompt is running");
         this.cam = Camera.main;
         EventBroadcaster.Instance.AddObserver(ActionEvent.Interacted.ToString(), this.OnInteracted);
 
 
 
-        Debug.Log("ProximityPrompt is finished");
+        //Debug.Log("ProximityPrompt is finished");
     }
 
     private void Update()
@@ -47,7 +47,7 @@ public class ProximityPrompt : MonoBehaviour
         else
             this.GetComponent<Canvas>().enabled = false;
 
-        Debug.Log($"Is in view: {this.isInView}; Is Enabled: {this.isEnabled}; Canvas is in range: {this.GetComponent<Canvas>().enabled}");
+        //Debug.Log($"Is in view: {this.isInView}; Is Enabled: {this.isEnabled}; Canvas is in range: {this.GetComponent<Canvas>().enabled}");
     }
 
     public void SetEnabled(bool state)
