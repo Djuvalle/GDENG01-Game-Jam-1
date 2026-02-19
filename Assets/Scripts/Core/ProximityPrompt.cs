@@ -52,9 +52,12 @@ public class ProximityPrompt : MonoBehaviour
 
         //Debug.Log($"Is in view: {this.isInView}; Is Enabled: {this.isEnabled}; Canvas is in range: {this.GetComponent<Canvas>().enabled}");
     }
-
     public void SetEnabled(bool state)
     {
         this.isEnabled = state;
+    }
+    public void SetText(string text)
+    {
+        this.textObj.text = text;
     }
 }
