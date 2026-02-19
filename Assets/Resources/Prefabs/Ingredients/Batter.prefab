@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5261130476978336958}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.941, y: 1.2245033, z: -4.049364}
   m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 0
@@ -228,7 +228,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Flour
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -8278947145487836355, guid: fd6786f7f6a7fb84895dcc8c1f9591d9, type: 3}
+    - {fileID: 8299388546407082575, guid: fd6786f7f6a7fb84895dcc8c1f9591d9, type: 3}
+    - {fileID: 1889806840927094549, guid: fd6786f7f6a7fb84895dcc8c1f9591d9, type: 3}
+    - {fileID: 5958503365689430219, guid: fd6786f7f6a7fb84895dcc8c1f9591d9, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a00f21ef96f2ba34cb47db7c7fee128d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
-  ingredientType: 0
+  ingredientType: 1
 --- !u!114 &1559482229298179010
 MonoBehaviour:
   m_ObjectHideFlags: 0
